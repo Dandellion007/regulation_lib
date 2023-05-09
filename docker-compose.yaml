@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  app: 
+    container_name: regulation_lib_app
+    build: .
+    ports:
+      - "3000:3000"
+
+  database:
+    container_name: regulation_lib_db
+    image: postgres:12.1
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # './init.sql' копируется в образ PostgreSQL, в нем он запускается автоматически 
