@@ -6,6 +6,10 @@ services:
     build: .
     ports:
       - "3000:3000"
+    depends_on:
+      - database
+    volumes:
+    - "./:/app"
 
   database:
     container_name: regulation_lib_db

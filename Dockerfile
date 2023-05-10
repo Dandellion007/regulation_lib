@@ -19,6 +19,6 @@ RUN gem install bundler -v 2.4
 WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN bundle check || bundle install 
-COPY . ./
+COPY . .
 RUN chmod +x ./entrypoints/docker-entrypoint.sh
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]

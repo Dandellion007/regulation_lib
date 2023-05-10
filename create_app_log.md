@@ -83,3 +83,8 @@ https://guides.rubyonrails.org/
 https://hub.docker.com/_/postgres
 
 
+### Routes в Rails приложении
+В самом веб приложении
+http://localhost:3000/rails/info/routes
+Через командную строку
+```rails routes```
