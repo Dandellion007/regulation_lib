@@ -88,3 +88,8 @@ https://hub.docker.com/_/postgres
 http://localhost:3000/rails/info/routes
 Через командную строку
 ```rails routes```
+
+Для создания файла пакетов packege.json
+```
+yarn init -y
+```

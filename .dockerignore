@@ -16,3 +16,4 @@ public/packs-test
 yarn-error.log
 coverage/
 .env
+package-lock.json
