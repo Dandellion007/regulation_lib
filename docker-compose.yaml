@@ -19,16 +19,11 @@ services:
     depends_on:
       - db
     volumes:
-      - project_dir:/app
+      - ./:/app
       - gem_cache:/usr/local/bundle/gems
       - node_modules:/app/node_modules
 
 volumes:
-  project_dir:
-    driver_opts:
-      type: 'none'
-      device: '/home/dan/work/regulation_lib'
-      o: 'bind'
   db_data:
   gem_cache:
   node_modules:
