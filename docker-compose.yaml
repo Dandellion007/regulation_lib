@@ -1,30 +1,34 @@
 version: '3.4'
 
 services:
+  db:
+    container_name: regulation_lib_db
+    image: postgres:12.1
+    ports:
+      - 5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # './init.sql' копируется в папку образа PostgreSQL, в нем он запускается автоматически
+
   app: 
     container_name: regulation_lib_app
     build: .
     ports:
       - 3000:3000
     depends_on:
-      - database
+      - db
     volumes:
       - project_dir:/app
       - gem_cache:/usr/local/bundle/gems
       - node_modules:/app/node_modules
 
-  database:
-    container_name: regulation_lib_db
-    image: postgres:12.1
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      # './init.sql' копируется в папку образа PostgreSQL, в нем он запускается автоматически
-
 volumes:
   project_dir:
     driver_opts:
       type: 'none'
-      device: '/home/dan/staff/regulation_lib'
+      device: '/home/dan/work/regulation_lib'
       o: 'bind'
+  db_data:
   gem_cache:
   node_modules:

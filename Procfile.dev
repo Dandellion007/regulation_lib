@@ -1,0 +1,3 @@
+web: ./entrypoints/docker-entrypoint.sh
+js: yarn build --watch=forever
+css: yarn build:css --watch

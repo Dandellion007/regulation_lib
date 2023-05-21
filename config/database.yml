@@ -1,10 +1,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  database: regulation_lib
-  username: regulation_lib
-  port: 5432
-  host: regulation_lib_db
+  database: myapp_development
+  username: postgres
+  password:
+  host: db
   pool: 5
   timeout: 5000
 
@@ -13,9 +13,9 @@ development:
 
 test:
   <<: *default
-  database: regulation_lib_test
+  database: myapp_development_test
 
 
 production:
   <<: *default
-  database: regulation_lib_production
+  database: myapp_development_production
