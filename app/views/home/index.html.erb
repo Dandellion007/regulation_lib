@@ -1,9 +1,24 @@
-<h1>Welcome, this is the home page</h1>  
-  
-<button type="button" 
-        class="btn btn-lg btn-danger" 
-        data-bs-toggle="popover" 
-        title="Popover title" 
-        data-bs-content="Amazing content, right ~123">
-        Click to toggle popover
-</button>  
+<div class="jumbotron">
+    <div class="container">
+        <h1>Want to Learn About documents?</h1>
+        <p>Are you ready to learn about documents?</p>
+        <br>
+        <p>
+            <%= button_to 'Get documents Info', documents_path, :method => :get,  :class => "btn btn-primary btn-lg"%>
+        </p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Not all documents are alike</h3>
+            <p>Though some are dangerous, documents generally do not attack humans. Out of the 500 species known to researchers, only 30 have been known to attack humans.
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <h3>documents are ancient</h3>
+            <p>There is evidence to suggest that documents lived up to 400 million years ago.
+            </p>
+        </div>
+    </div>
+</div>

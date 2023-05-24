@@ -3,8 +3,7 @@
 <%= render @document %>
 
 <div>
-  <%= link_to "Edit this document", edit_document_path(@document) %> |
-  <%= link_to "Back to documents", documents_path %>
+  <%= link_to "Edit this document", edit_document_path(@document), :class => "btn btn-primary btn-sm" %> <%= link_to "Back to documents", documents_path, :class => "btn btn-primary btn-sm" %>
 
   <%= button_to "Destroy this document", @document, method: :delete %>
 </div>
