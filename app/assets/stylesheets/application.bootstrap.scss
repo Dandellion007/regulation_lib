@@ -1,10 +1,27 @@
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
 $white: white;
 $black: black;
+
+
+
+// $body-bg: #000;
+// $body-color: red;
+
+// .navbar-nav {
+//   --bs-nav-link-color: red;
+//   // color: var(--bs-navbar-active-color);
+// }
+
+
+:root {
+  --bs-font-sans-serif: 'Montserrat', sans-serif !important;
+}
 
 body {
   background: $black;
   color: $white;
-  font-family: "Merriweather", sans-serif;
+  // font-family: 'Montserrat', sans-serif !important;
 }
 h1,
 h2 {
