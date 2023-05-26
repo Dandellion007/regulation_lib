@@ -1,16 +1,20 @@
-$urfu-blue: #1e4391;
-$urfu-light-blue: #748ab9;
 
 .navbar {
   margin-bottom: 0;
-  background: $black;
+  background: black;
 }
 
 .navbar-nav {
-  .nav-link, .nav-link.active, .nav-link.disabled {
-    border: $urfu-blue solid 1px;
+  .nav-link, .nav-link.disabled {
+    border: $urfu-light-blue solid 1px;
     border-radius: 30px;
     margin: 0 5px 0 5px;
+    color: $urfu-light-blue;
+    padding-left: 7px; // для отступа в мобилке
+  }
+  .nav-link.active {
     color: $urfu-blue !important;
+    border-color: $urfu-blue;
   }
 }
+

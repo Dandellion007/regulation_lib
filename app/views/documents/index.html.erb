@@ -1,14 +1,26 @@
 <p style="color: green"><%= notice %></p>
 
-<h1 style="font-family: 'Montserrat', sans-serif;">Documents</h1>
+<% content_for :sub_title do %>
+  Документы
+<% end %>
 
-<div id="documents">
-  <% @documents.each do |document| %>
-    <%= render document %>
-    <p>
-      <%= link_to "Show this document", document %>
-    </p>
-  <% end %>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Обозначение</th>
+        <th>Код ОКС</th>
+        <th>Наименование</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @documents %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New document", new_document_path, :class => "btn btn-primary btn-sm" %> <%= link_to 'Home', home_index_path, :class => "btn btn-primary btn-sm" %>
+ <%=  controller.class.name %>
+ <%=  controller.action_name %>
+
+ 
