@@ -1,12 +1,30 @@
-<div id="<%= dom_id document %>">
-  <p>
-    <strong>Name:</strong>
-    <%= document.name %>
-  </p>
+<tr>
+  <th><%= 1 %></th>
+  <td><%= document.name %></td>
+  <td>код окс</td>
+  <td><%= document.desc %></td>
+</tr>
 
-  <p>
-    <strong>Desc:</strong>
-    <%= document.desc %>
-  </p>
 
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Поле</th>
+        <th>Первоначальное значений</th>
+        <th>Последняя актуализация</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @documents.each_with_index do |document, i| %>
+        <tr>
+          <th><%= i + 1 %></th>
+          <td><%= document.name %></td>
+          <td>код окс</td>
+          <td><%= document.desc %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

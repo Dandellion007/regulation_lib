@@ -1,70 +1,70 @@
-@import url('https://fonts.cdnfonts.com/css/montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
-$white: white;
-$black: black;
+$urfu-dark-blue: #0F2B5E;
+$urfu-blue: #1E4391;
+$urfu-light-blue: #748AB9;
+$urfu-dark-gray: #7A7A7A;
+$urfu-gray: #A7A7A7;
+$urfu-light-gray: #D3D3D3;
+
+$urfu-background: #f5f5f5;
 
 
+table.table {
+  thead {
+    tr {
+      th {
+        color: $urfu-blue;
+        font-size: 14px;
+        line-height: 120%;
+      }
+    }
+  }
+  tbody {
+    tr {
+      th {
+        font-size: 14px;
+        line-height: 140%;
+      }
+      :first-child {
+        color: $urfu-gray;
+      }
+    }
+  }
+}
 
-// $body-bg: #000;
-// $body-color: red;
-
-// .navbar-nav {
-//   --bs-nav-link-color: red;
-//   // color: var(--bs-navbar-active-color);
-// }
-
+// FONT WEIGHT VALUE
+// Regular - 400
+// Medium - 500
+// SemiBold - 600
+// Bold - 700
 
 :root {
   --bs-font-sans-serif: 'Montserrat', sans-serif !important;
 }
 
-body {
-  background: $black;
-  color: $white;
-  // font-family: 'Montserrat', sans-serif !important;
-}
-h1,
-h2 {
-  font-weight: bold;
-}
-p {
-  font-size: 16px;
-  color: $white;
-}
-a:visited {
-  color: $black;
-}
 .jumbotron {
   background: #0048cd;
-  color: $white;
+  color: white;
   text-align: center;
   p {
-    color: $white;
+    color: white;
     font-size: 26px;
   }
 }
-.link {
-  color: $white;
-}
 .btn-primary {
-  color: $white;
-  border-color: $white;
+  color: white;
+  border-color: white;
   margin-bottom: 5px;
 }
 .btn-sm {
-  background-color: $white;
+  background-color: white;
   display: inline-block;
 }
-img,
-video,
-audio {
-  margin-top: 20px;
-  max-width: 80%;
-}
-caption {
-  float: left;
-  clear: both;
-}
+
+
+
+
 
 @import "navigation.scss";
 
