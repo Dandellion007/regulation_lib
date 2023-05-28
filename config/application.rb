@@ -33,5 +33,11 @@ module RegulationLib
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # I18n configs (from crm configs)
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{yml}').to_s]
+    I18n.available_locales = [:en, :ru] # разрешенные локали, доступные приложению
+    I18n.default_locale = :ru # устанавливаем локаль по умолчанию
+    I18n.reload!
   end
 end

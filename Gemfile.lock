@@ -203,6 +203,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   foreman (~> 0.87.2)
+  i18n
   jbuilder
   jsbundling-rails
   pg (~> 1.1)

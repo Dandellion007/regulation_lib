@@ -1,24 +1,22 @@
+
 <%= form_with(model: document) do |form| %>
-  <% if document.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
-
-      <ul>
-        <% document.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Поле</th>
+          <th>Значение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Document.all.each do |attr| %>
+          <tr>
+            <td><%= t "model.document.#{attr}" %></td>
+            <td><%= form.text_field attr %></td>
+          </tr>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :desc, style: "display: block" %>
-    <%= form.text_field :desc %>
+      </tbody>
+    </table>
   </div>
 
   <div>

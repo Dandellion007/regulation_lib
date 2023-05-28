@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_210436) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_28_133131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bases", force: :cascade do |t|
     t.string "name"
-    t.integer "document_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -24,6 +23,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_210436) do
   create_table "documents", force: :cascade do |t|
     t.string "name"
     t.string "desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "references", force: :cascade do |t|
+    t.integer "attributes_id", null: false
+    t.integer "referrer_doc_id", null: false
+    t.integer "referral_doc_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,24 @@
+ru:
+  hello_world: 'Привет %{word}!'
+
+  model:
+    document:
+      designation: 'Обозначение стандарта'
+      denomination: 'Наименование стандарта'
+      oks_code: 'Код ОКС'
+      okpd_code: 'Код ОКПД '
+      developer: 'Разработчик'
+      replacement_for: 'Принят взамен'
+      doc_content_link: 'Текст документа'
+      amendments: 'Поправки'
+
+      head_content: 'Содержание'
+      key_phrases: 'Ключевые слова'
+      key_words: 'Ключевые фразы'
+
+      acceptance_date: 'Дата принятия'
+      introduction_date: 'Дата введения'
+      desc_update_date: 'Дата актуализации описания'
+
+      acceptance_level: 'Уровень принятия'
+      activity_status: 'Статус активности'
