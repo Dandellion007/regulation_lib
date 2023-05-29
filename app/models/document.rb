@@ -1,12 +1,14 @@
 class Document < ApplicationRecord
-  has_one :original, class_name: 'Attributes::Original'
-  has_one :shift, class_name: 'Attributes::Shift'
+  has_one :original, -> { where(set_type: :original) }, class_name: 'FieldsSet'
+  has_one :shift, -> { where(set_type: :shift) }, class_name: 'FieldsSet'
 
   has_many :original_references, through: :original, source: 'references'
   has_many :shift_references, through: :shift, source: 'references'
 
+  # :archived=>false,
+
   class << self
-    def all
+    def all_fields
       [:strings, :dates, :texts, :enums].map { |s| send(s) }.inject(:|)
     end
 
@@ -28,5 +30,21 @@ class Document < ApplicationRecord
     def enums
       [:acceptance_level, :activity_status]
     end
+
+    def acceptance_level_for_select
+      FieldsSet.acceptance_levels.map { |k, v| [(I18n.t "model.document.acceptance_level_values.#{k}"), v] }
+    end
+
+    def activity_status_for_select
+      FieldsSet.activity_statuses.map { |k, v| [(I18n.t "model.document.activity_status_values.#{k}"), v] }
+    end
+  end
+
+  def last_values
+    values = {}
+    self.class.all_fields.each do |field|
+      values[field] = shift&.send(field) || original.send(field) || ''
+    end
+    values
   end
 end

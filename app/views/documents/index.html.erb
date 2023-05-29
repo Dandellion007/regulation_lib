@@ -4,7 +4,6 @@
   Документы
 <% end %>
 
-
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>
@@ -14,16 +13,20 @@
         <th>Код ОКС</th>
         <th>Наименование</th>
         <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @documents.each_with_index do |document, i| %>
         <tr>
           <th class="number"><%= i + 1 %></th>
-          <td>Обозначение</td>
-          <td>Код ОКС</td>
-          <td>Наименование</td>
+          <td><%= document.original.try(:designation) %></td>
+          <td><%= document.original.try(:oks_code) %></td>
+          <td><%= document.original.try(:denomination) %></td>
           <td><%= button_to "", document, method: :get, class: "show_document_btn" %></td>
+          <td><%= button_to "", edit_document_path(document), method: :get, class: "show_document_btn" %></td> <%# EDIT %>
+          <td><%= button_to "", raw_edit_document_path(document), method: :get, class: "show_document_btn" %></td> <%# EDIT %>
         </tr>
       <% end %>
     </tbody>

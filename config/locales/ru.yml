@@ -1,6 +1,5 @@
 ru:
   hello_world: 'Привет %{word}!'
-
   model:
     document:
       designation: 'Обозначение стандарта'
@@ -11,14 +10,21 @@ ru:
       replacement_for: 'Принят взамен'
       doc_content_link: 'Текст документа'
       amendments: 'Поправки'
-
       head_content: 'Содержание'
       key_phrases: 'Ключевые слова'
       key_words: 'Ключевые фразы'
-
       acceptance_date: 'Дата принятия'
       introduction_date: 'Дата введения'
       desc_update_date: 'Дата актуализации описания'
-
       acceptance_level: 'Уровень принятия'
+      acceptance_level_values:
+        international: 'Международный'
+        foreign: 'Иностранный'
+        national: 'Национальный'
+        interstate: 'Межгосударственный'
+        organizations:  'Стандарт организации'
       activity_status: 'Статус активности'
+      activity_status_values:
+        active: 'Действующий'
+        canceled: 'Отменен'
+        replaced: 'Заменен'

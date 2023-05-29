@@ -1,5 +1,5 @@
 
-<%= form_with(model: document) do |form| %>
+<%= form_with model: document, class: 'edit_form' do |form| %>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -9,10 +9,21 @@
         </tr>
       </thead>
       <tbody>
-        <% Document.all.each do |attr| %>
+        <% Document.all_fields.each do |field| %>
           <tr>
-            <td><%= t "model.document.#{attr}" %></td>
-            <td><%= form.text_field attr %></td>
+            <td><%= t "model.document.#{field}" %></td>
+            <td>
+              <% if Document.dates.include?(field) %>
+                <%= form.date_field field, value: document.original.try(:send, field) %>
+              <% elsif Document.texts.include?(field) %>
+                <%= form.text_area field, value: document.original.try(:send, field) %>
+              <% elsif Document.enums.include?(field) %>
+                <%= form.select field, options_for_select(Document.send("#{field}_for_select"),
+                  FieldsSet.acceptance_levels[document.original.try(:send, field)]), include_blank: true %>
+              <% else %>
+                <%= form.text_field field, value: document.original.try(:send, field) %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

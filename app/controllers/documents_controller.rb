@@ -1,30 +1,25 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: %i[show edit update destroy]
+  before_action :set_document, only: %i[show edit raw_edit update destroy]
 
-  # GET /documents or /documents.json
   def index
     @documents = Document.all
   end
 
-  # GET /documents/1 or /documents/1.json
-  def show
-  end
+  def show; end
 
-  # GET /documents/new
   def new
     @document = Document.new
   end
 
-  # GET /documents/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /documents or /documents.json
+  def raw_edit; end
+
   def create
-    @document = Document.new(document_params)
+    @document = DocumentService.new.create(document_params)
 
     respond_to do |format|
-      if @document.save
+      if @document.errors.empty?
         format.html { redirect_to document_url(@document), notice: "Document was successfully created." }
         format.json { render :show, status: :created, location: @document }
       else
@@ -34,10 +29,10 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /documents/1 or /documents/1.json
   def update
+    document = DocumentService.new.update(document_params, @document)
     respond_to do |format|
-      if @document.update(document_params)
+      if document.errors.empty?
         format.html { redirect_to document_url(@document), notice: "Document was successfully updated." }
         format.json { render :show, status: :ok, location: @document }
       else
@@ -47,7 +42,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # DELETE /documents/1 or /documents/1.json
   def destroy
     @document.destroy
 
@@ -59,13 +53,11 @@ class DocumentsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_document
     @document = Document.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def document_params
-    params.require(:document).permit(:name, :desc)
+    params.require(:document).permit(Document.all_fields)
   end
 end

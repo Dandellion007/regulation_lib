@@ -3,16 +3,34 @@
     <thead>
       <tr>
         <th>Поле</th>
-        <th>Первоначальное значений</th>
+        <th>Первоначальное значение</th>
         <th>Последняя актуализация</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th>поле</th>
-        <td>первоначальное значений</td>
-        <td>последняя актуализация</td>
-      </tr>
+      <% Document.all_fields.each do |field| %>
+        <tr>
+          <td><%= t "model.document.#{field}" %></td>
+          <% if Document.texts.include?(field) %>
+            <td><pre style="font-family: inherit; max-width: 600px;"><%= @document.original.try(:send, field) %></pre></td>
+            <td><pre style="font-family: inherit; max-width: 600px;"><%= @document.shift.try(:send, field) %></pre></td>    
+          <% elsif Document.enums.include?(field) %>
+            <td><p style="max-width: 400px; word-break: break-word; margin-bottom: 0px">
+              <% if @document.original && @document.original.try(:send, field) %>
+                <%= t "model.document.#{field}_values.#{@document.original.send(field)}" %>
+              <% end %>
+            </p></td>
+            <td><p style="max-width: 400px; word-break: break-word; margin-bottom: 0px">
+              <% if @document.shift && @document.shift.try(:send, field) %>
+                <%= t "model.document.#{field}_values.#{@document.shift.send(field)}" %>
+              <% end %>
+            </p></td>
+          <% else %>
+            <td><p style="max-width: 400px; word-break: break-word; margin-bottom: 0px"><%= @document.original.try(:send, field) %></p></td>
+            <td><p style="max-width: 400px; word-break: break-word; margin-bottom: 0px"><%= @document.shift.try(:send, field) %></p></td>
+          <% end %>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div>

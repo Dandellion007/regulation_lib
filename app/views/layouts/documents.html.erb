@@ -1,10 +1,9 @@
 <% content_for :content do %>
-  <div class="jumbotron text-center">
-    <h1><%= content_for?(:sub_title) ? yield(:sub_title) : "Sub Title" %></h1>
+  <div class="jumbotron">
+    <h3><%= content_for?(:sub_title) ? yield(:sub_title) : "Дополнительная страница" %></h3>
   </div>
 
   <div class="container">
-    <h1><%= t :hello_world, word: 'Sasimus' %></h1>
     <%= yield %>
   </div>
 <% end %>
