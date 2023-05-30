@@ -17,27 +17,19 @@ class DocumentsController < ApplicationController
 
   def create
     @document = DocumentService.new.create(document_params)
-    respond_to do |format|
-      if @document.errors.empty?
-        format.html { redirect_to document_url(@document), notice: "Документ успешно создан." }
-        format.json { render :show, status: :created, location: @document }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    if @document.errors.empty?
+      render json: {path: document_url(@document), notice: "Документ успешно создан."}
+    else
+      render json: @document.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    document = DocumentService.new.update(document_params, @document)
-    respond_to do |format|
-      if document.errors.empty?
-        format.html { redirect_to document_url(@document), notice: "Документ успешно обновлен." }
-        format.json { render :show, status: :ok, location: @document }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    @document = DocumentService.new.update(document_params, @document)
+    if @document.errors.empty?
+      render json: {path: document_url(@document), notice: "Документ успешно обновлен."}
+    else
+      render json: @document.errors, status: :unprocessable_entity
     end
   end
 

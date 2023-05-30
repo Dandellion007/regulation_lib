@@ -6,4 +6,6 @@ class FieldsSet < ApplicationRecord
   enum :acceptance_level, [:international, :foreign, :national, :interstate, :organizations]
   enum :activity_status, [:active, :canceled, :replaced]
   enum :set_type, [:original, :shift]
+
+  validates_presence_of :designation
 end

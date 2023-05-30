@@ -12,6 +12,25 @@ $urfu-background: #f5f5f5;
 // .edit_form {
 //   max-width: 800px;
 // }
+main {
+  margin-bottom: 50px;
+}
+
+.btn {
+  &.btn-primary {
+    margin-bottom: 0px;
+    margin-right: 5px;
+    // background: $urfu-blue;
+  }
+  &.btn-secondary {
+    background: $urfu-dark-gray;
+  }
+}
+
+span.required_field:after {
+  content:"*";
+  color:red;
+}
 
 button.document_action_btn {
   border: none;
@@ -27,8 +46,8 @@ button.document_action_btn {
     background-image: url('show_document.svg');
   }
   &.edit_action {
-    background-image: url('pencil.svg');
     background-size: 100%;
+    background-image: url('pencil.svg');
   }
   &.raw_edit_action {
     background-size: 100%;

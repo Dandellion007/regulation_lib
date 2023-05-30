@@ -1,5 +1,5 @@
 
-<%= form_with model: document, class: 'edit_form' do |form| %>
+<%= form_with model: document, class: 'edit_form needs-validation', id: 'document_form_edit'  do |form| %>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -11,17 +11,24 @@
       <tbody>
         <% Document.all_fields.each do |field| %>
           <tr>
-            <td><%= t "model.document.#{field}" %></td>
+            <td><span class="<%= field == :designation ? 'required_field' : '' %>">
+              <%= t "model.document.#{field}" %>
+            </span></td>
             <td>
               <% if Document.dates.include?(field) %>
-                <%= form.date_field field, value: document.last_values[field] %>
+                <%= form.date_field field, value: document.last_values[field], class: 'form-control' %>
               <% elsif Document.texts.include?(field) %>
-                <%= form.text_area field, value: document.last_values[field] %>
+                <%= form.text_area field, value: document.last_values[field], class: 'form-control' %>
               <% elsif Document.enums.include?(field) %>
-                <%= form.select field, options_for_select(Document.send("#{field}_for_select"),
-                  document.last_values[field]), include_blank: true %>
+                <%= form.select(field, options_for_select(Document.send("#{field}_for_select"),
+                  document.last_values[field]), {include_blank: true}, {class: 'form-select'}) %>
               <% else %>
-                <%= form.text_field field, value:document.last_values[field] %>
+                <div>
+                  <%= form.text_field field, value:document.last_values[field], class: 'form-control' %>
+                  <% if field == :designation %>
+                    <div class='invalid-feedback'>Заполните обозначение стандарта</div>
+                  <% end %>
+                </div>
               <% end %>
             </td>
           </tr>
@@ -30,7 +37,35 @@
     </table>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div >
+    <%= form.submit 'Сохранить', class: 'btn btn-primary btn-sm' %>
+    <%= link_to "Отменить", documents_path, :class => "btn btn-secondary btn-sm" %>
   </div>
 <% end %>
+
+<script>
+  $(function() {
+    form = $('form#document_form_edit');
+
+    form.submit(function(){
+      event.preventDefault();
+
+      $.ajax({
+        type: "post",
+        url: form[0].action,
+        data: form.serialize(),
+        success:function(data) {
+            if(data) {
+              window.location.href = data.path;
+            } else { 
+              console.log('no_data');
+            }
+        },
+        error: function(){
+          v = $('#document_designation')
+          v.addClass('is-invalid')
+        }
+      });
+    });
+  });
+</script>

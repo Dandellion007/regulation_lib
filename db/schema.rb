@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_114149) do
     t.string "replacement_for", comment: "Принят взамен"
     t.string "doc_content_link", comment: "Текст документа"
     t.string "amendments", comment: "Поправки"
+    t.boolean "archived", default: false, null: false, comment: "Документ архивирован"
     t.text "head_content", comment: "Содержание"
     t.text "key_phrases", comment: "Ключевые слова"
     t.text "key_words", comment: "Ключевые фразы"
@@ -52,7 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_114149) do
   end
 
   create_table "references", force: :cascade do |t|
-    t.integer "fields_set_id", null: false
+    t.integer "attributes_id", null: false
     t.integer "referrer_doc_id", null: false
     t.integer "referral_doc_id", null: false
     t.datetime "created_at", null: false

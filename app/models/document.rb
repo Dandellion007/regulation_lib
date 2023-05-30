@@ -1,9 +1,9 @@
 class Document < ApplicationRecord
-  has_one :original, -> { where(set_type: :original) }, class_name: 'FieldsSet'
-  has_one :shift, -> { where(set_type: :shift) }, class_name: 'FieldsSet'
+  has_one :original, -> { where(set_type: :original) }, class_name: 'FieldsSet', dependent: :destroy
+  has_one :shift, -> { where(set_type: :shift) }, class_name: 'FieldsSet', dependent: :destroy
 
-  has_many :original_references, through: :original, source: 'references'
-  has_many :shift_references, through: :shift, source: 'references'
+  has_many :original_references, through: :original, source: 'references', dependent: :destroy
+  has_many :shift_references, through: :shift, source: 'references', dependent: :destroy
 
   # :archived=>false,
 
