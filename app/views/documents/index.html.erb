@@ -24,9 +24,9 @@
           <td><%= document.original.try(:designation) %></td>
           <td><%= document.original.try(:oks_code) %></td>
           <td><%= document.original.try(:denomination) %></td>
-          <td><%= button_to "", document, method: :get, class: "show_document_btn" %></td>
-          <td><%= button_to "", edit_document_path(document), method: :get, class: "show_document_btn" %></td> <%# EDIT %>
-          <td><%= button_to "", raw_edit_document_path(document), method: :get, class: "show_document_btn" %></td> <%# EDIT %>
+          <td><%= button_to "", document, method: :get, class: "document_action_btn show_action" %></td>
+          <td><%= button_to "", edit_document_path(document), method: :get, class: "document_action_btn edit_action" %></td> <%# EDIT %>
+          <td><%= button_to "", raw_edit_document_path(document), method: :get, class: "document_action_btn raw_edit_action" %></td> <%# EDIT %>
         </tr>
       <% end %>
     </tbody>

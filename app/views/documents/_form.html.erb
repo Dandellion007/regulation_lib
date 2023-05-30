@@ -14,14 +14,14 @@
             <td><%= t "model.document.#{field}" %></td>
             <td>
               <% if Document.dates.include?(field) %>
-                <%= form.date_field field, value: document.original.try(:send, field) %>
+                <%= form.date_field field, value: document.last_values[field] %>
               <% elsif Document.texts.include?(field) %>
-                <%= form.text_area field, value: document.original.try(:send, field) %>
+                <%= form.text_area field, value: document.last_values[field] %>
               <% elsif Document.enums.include?(field) %>
                 <%= form.select field, options_for_select(Document.send("#{field}_for_select"),
-                  FieldsSet.acceptance_levels[document.original.try(:send, field)]), include_blank: true %>
+                  document.last_values[field]), include_blank: true %>
               <% else %>
-                <%= form.text_field field, value: document.original.try(:send, field) %>
+                <%= form.text_field field, value:document.last_values[field] %>
               <% end %>
             </td>
           </tr>

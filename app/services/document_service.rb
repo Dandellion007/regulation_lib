@@ -1,5 +1,8 @@
 class DocumentService
   def create(params)
+    params = params.to_h
+
+    params = params.compact_blank
     document = Document.new
     document.build_original(enum_value_to_i(params))
     document.save
@@ -7,33 +10,28 @@ class DocumentService
   end
 
   def update(params, document)
+    params = params.to_h.symbolize_keys
+    params = params.filter { |k, v| v != document.last_values[k].to_s }
+    params = enum_value_to_i(params)
+
+    original_new_fields = document.original.attributes.symbolize_keys.slice(*params.keys).filter { |_, v| v.nil? }.keys
+
+    # debugger
+
+    document.original.update(params.slice(*original_new_fields))
+    params.except!(*original_new_fields)
+
     if document.shift
-      
-      params = params.filter { |_, v| v }
+      shift_new_fields = document.shift.attributes.symbolize_keys.slice(*params.keys).filter { |_, v| v.nil? }.keys
+      document.shift.update(params.slice(*shift_new_fields))
+      params.except!(*shift_new_fields)
 
-
-      shift = document.shift
-      new_fields = shift.attributes.symbolize_keys.except(:id, :created_at, :updated_at)  
-
-      new_fields.keys.each do |key|
-        if new_fields[key] == shift.send()
-
-        end
-      end
-
-      document.original.update(new_fields)
+      shift_fields = document.shift.attributes.symbolize_keys.slice(*params.keys)
+      document.original.update(shift_fields)
       document.shift.update(params)
     else
-
-      params = params.filter { |_, v| v != document.original.send(v) }
-      params = enum_value_to_i(params)
-
       document.build_shift(params)
       document.save
-
-
-
-
     end
     document
   end

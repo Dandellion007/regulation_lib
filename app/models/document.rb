@@ -41,10 +41,16 @@ class Document < ApplicationRecord
   end
 
   def last_values
-    values = {}
+    return @last_values if @last_values
+
+    @last_values = {}
     self.class.all_fields.each do |field|
-      values[field] = shift&.send(field) || original.send(field) || ''
+      @last_values[field] = if shift && !shift.send(field).nil?
+                              shift.try(:send, "#{field}_before_type_cast")
+                            else
+                              original.try(:send, "#{field}_before_type_cast")
+                            end
     end
-    values
+    @last_values
   end
 end

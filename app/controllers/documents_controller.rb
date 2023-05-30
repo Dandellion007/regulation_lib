@@ -17,10 +17,9 @@ class DocumentsController < ApplicationController
 
   def create
     @document = DocumentService.new.create(document_params)
-
     respond_to do |format|
       if @document.errors.empty?
-        format.html { redirect_to document_url(@document), notice: "Document was successfully created." }
+        format.html { redirect_to document_url(@document), notice: "Документ успешно создан." }
         format.json { render :show, status: :created, location: @document }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +32,7 @@ class DocumentsController < ApplicationController
     document = DocumentService.new.update(document_params, @document)
     respond_to do |format|
       if document.errors.empty?
-        format.html { redirect_to document_url(@document), notice: "Document was successfully updated." }
+        format.html { redirect_to document_url(@document), notice: "Документ успешно обновлен." }
         format.json { render :show, status: :ok, location: @document }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,7 +45,7 @@ class DocumentsController < ApplicationController
     @document.destroy
 
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: "Document was successfully destroyed." }
+      format.html { redirect_to documents_url, notice: "Документ успешно удален." }
       format.json { head :no_content }
     end
   end

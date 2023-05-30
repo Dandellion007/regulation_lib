@@ -14,7 +14,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_114149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bases", force: :cascade do |t|
+    t.string "name"
+    t.integer "document_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "documents", force: :cascade do |t|
+    t.string "name"
+    t.string "desc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,7 +38,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_114149) do
     t.string "replacement_for", comment: "Принят взамен"
     t.string "doc_content_link", comment: "Текст документа"
     t.string "amendments", comment: "Поправки"
-    t.boolean "archived", default: false, null: false, comment: "Документ архивирован"
     t.text "head_content", comment: "Содержание"
     t.text "key_phrases", comment: "Ключевые слова"
     t.text "key_words", comment: "Ключевые фразы"
