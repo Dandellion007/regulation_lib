@@ -4,24 +4,32 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <% class_var = current_user ? '' : 'disabled' %>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a id="index" class="nav-link" href=<%= documents_path %>>Все документы</a>
+          <a id="index" class="nav-link <%= class_var %>" href=<%= documents_path %>>Все документы</a>
         </li>
         <li class="nav-item">
-          <a id="new" class="nav-link" href=<%= new_document_path %>>Создать документ</a>
+          <a id="new" class="nav-link <%= class_var %>" href=<%= new_document_path %>>Создать документ</a>
         </li>
         <li class="nav-item">
-          <a id="archive_index" class="nav-link" href=<%= archive_index_path %>>Архив</a>
+          <a id="archive_index" class="nav-link <%= class_var %>" href=<%= archive_index_path %>>Архив</a>
         </li>
       </ul>
     </div>
+
+     <% if current_user %>
+      <span class="nav-item mr-3 nav-link p-3">Выйти</span>
+      <%= button_to "", destroy_user_session_path, method: :delete, class: "action_btn logout_action" %>
+     <% end %>
   </div>
 </nav>
 
 <script>
-  var element = document.getElementById("<%= controller.action_name %>");
-  element.classList.add("active")
-  element.setAttribute("aria-current", "page")
+  if ('<%= class_var %>' !== 'disabled') {
+    var element = document.getElementById("<%= controller.action_name %>");
+    element.classList.add("active")
+    element.setAttribute("aria-current", "page")
+  }
 </script>

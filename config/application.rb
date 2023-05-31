@@ -34,7 +34,11 @@ module RegulationLib
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.action_mailer.default_url_options = { host: 'localhost', port: '3000' }
+    config.action_mailer.default_url_options = {host: 'localhost', port: '3000'}
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      "#{html_tag}".html_safe
+    }
 
     # I18n configs (from crm configs)
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{yml}').to_s]

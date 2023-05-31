@@ -37,9 +37,10 @@ class DocumentsController < ApplicationController
   def create
     @document = DocumentService.new.create(document_params)
     if @document.errors.empty?
-      render json: {path: document_url(@document), notice: "Документ успешно создан."}
+      redirect_to document_url(@document), notice: "Документ успешно создан."
     else
-      render json: @document.errors, status: :unprocessable_entity
+      @fail_field = @document.errors.messages.keys[0]
+      render :new, status: :unprocessable_entity
     end
   end
 

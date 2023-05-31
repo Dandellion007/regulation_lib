@@ -1,5 +1,5 @@
 
-<%= form_with model: document, class: 'edit_form needs-validation', id: 'document_form_edit'  do |form| %>
+<%= form_with model: document, class: 'edit_form', id: 'document_form_edit'  do |form| %>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -23,14 +23,14 @@
                 <%= form.select(field, options_for_select(Document.send("#{field}_for_select"),
                   document.last_values[field]), {include_blank: true}, {class: 'form-select'}) %>
               <% else %>
-                <div>
-                  <% if field == :designation %>
-                    <%= form.text_field field, value:document.last_values[field], class: 'form-control' %>
-                    <div class='invalid-feedback'>Заполните обозначение стандарта</div>
-                  <% else %>
-                    <%= form.text_field field, value:document.last_values[field], class: 'form-control' %>
-                  <% end %>
-                </div>
+                <% if field == :designation && @fail_field == :designation %>
+                  <div>
+                    <%= form.text_field field, value:document.last_values[field], class: "form-control is-invalid" %>
+                    <div class="invalid-feedback">Заполните обозначение стандарта</div>
+                  </div>
+                <% else %>
+                  <%= form.text_field field, value:document.last_values[field], class: 'form-control' %>
+                <% end %>
               <% end %>
             </td>
           </tr>
@@ -41,39 +41,6 @@
 
   <div >
     <%= form.submit 'Сохранить', class: 'btn btn-primary btn-sm' %>
-    <%= link_to "Отменить", documents_path, :class => "btn btn-secondary btn-sm" %>
+    <%= link_to 'Отменить', documents_path, class: 'btn btn-secondary btn-sm' %>
   </div>
 <% end %>
-
-<script>
-  $(function() {
-    form = $('form#document_form_edit');
-
-    form.submit(function(){
-      event.preventDefault();
-
-      if ($('#document_designation')[0].value == '') {
-        v = $('#document_designation')
-        v.addClass('is-invalid')
-        return;
-      }
-
-      $.ajax({
-        type: "post",
-        url: form[0].action,
-        data: form.serialize(),
-        success:function(data) {
-            if(data) {
-              window.location.href = data.path;
-            } else { 
-              console.log('no_data');
-            }
-        },
-        error: function(){
-          v = $('#document_designation')
-          v.addClass('is-invalid')
-        }
-      });
-    });
-  });
-</script>

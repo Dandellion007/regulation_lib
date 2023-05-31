@@ -32,7 +32,7 @@ span.required_field:after {
   color:red;
 }
 
-button.document_action_btn {
+button.action_btn {
   border: none;
   background-color: transparent;
   display: inline-block;
@@ -41,17 +41,19 @@ button.document_action_btn {
   vertical-align: middle;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 116%;
+  background-size: 100%;
   &.show_action {
     background-image: url('show_document.svg');
-  }
+    background-size: 116%;
+}
   &.edit_action {
-    background-size: 100%;
     background-image: url('pencil.svg');
   }
   &.raw_edit_action {
-    background-size: 100%;
     background-image: url('wrench.svg');
+  }
+  &.logout_action {
+    background-image: url('logout.svg');
   }
 }
 table.table {
