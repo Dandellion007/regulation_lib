@@ -34,6 +34,8 @@ module RegulationLib
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    config.action_mailer.default_url_options = { host: 'localhost', port: '3000' }
+
     # I18n configs (from crm configs)
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{yml}').to_s]
     I18n.available_locales = [:en, :ru] # разрешенные локали, доступные приложению

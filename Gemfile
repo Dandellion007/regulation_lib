@@ -44,7 +44,6 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -52,7 +51,10 @@ gem "bootsnap", require: false
 ### Manually added gems ###
 gem "foreman", "~> 0.87.2"
 
-gem 'i18n'
+gem "i18n"
+
+gem "responders", "~> 3.1"
+gem "devise", "~> 4.9", ">= 4.9.2"
 
 ###########################
 ###########################
