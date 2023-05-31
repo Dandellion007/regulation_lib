@@ -24,9 +24,11 @@
                   document.last_values[field]), {include_blank: true}, {class: 'form-select'}) %>
               <% else %>
                 <div>
-                  <%= form.text_field field, value:document.last_values[field], class: 'form-control' %>
                   <% if field == :designation %>
+                    <%= form.text_field field, value:document.last_values[field], class: 'form-control' %>
                     <div class='invalid-feedback'>Заполните обозначение стандарта</div>
+                  <% else %>
+                    <%= form.text_field field, value:document.last_values[field], class: 'form-control' %>
                   <% end %>
                 </div>
               <% end %>
@@ -49,6 +51,12 @@
 
     form.submit(function(){
       event.preventDefault();
+
+      if ($('#document_designation')[0].value == '') {
+        v = $('#document_designation')
+        v.addClass('is-invalid')
+        return;
+      }
 
       $.ajax({
         type: "post",

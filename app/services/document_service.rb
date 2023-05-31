@@ -11,8 +11,6 @@ class DocumentService
   end
 
   def update(params, document)
-    debugger
-
     params = params.to_h.symbolize_keys
     params = params.filter { |k, v| v != document.last_values[k].to_s }
     params = enum_value_to_i(params)
@@ -23,8 +21,6 @@ class DocumentService
     params.except!(*original_new_fields)
 
     if document.shift
-      debugger
-
       shift_new_fields = document.shift.attributes.symbolize_keys.slice(*params.keys).filter { |_, v| v.nil? }.keys
       document.shift.update(params.slice(*shift_new_fields))
       params.except!(*shift_new_fields)
@@ -34,10 +30,14 @@ class DocumentService
       shift = document.shift
       shift.errors.messages.each { |k, v| document.errors.add(k, *v) } unless shift.update(params)
     else
-      debugger
       shift = document.build_shift(params)
       shift.errors.messages.each { |k, v| document.errors.add(k, *v) } unless shift.save
     end
+    document
+  end
+
+  def archive(document)
+    document.update(archived: true)
     document
   end
 
@@ -47,7 +47,7 @@ class DocumentService
 
   def enum_value_to_i(params)
     enum_values = {}
-    Document.enums.each { |k| enum_values[k] = params.delete(k) }
+    Document.enums.each { |k| enum_values[k] = params.delete(k) if params.has_key?(k) }
     enum_values.each { |k, v| params[k] = (v.present? ? v.to_i : '') }
     params
   end

@@ -1,3 +1,18 @@
 <p style="color: green"><%= notice %></p>
+<% content_for :sub_title do %>
+  Просмотр <%= @document.archived? ? 'архивного' : '' %> документа
+<% end %>
+
+<div style="margin-bottom: 10px;">
+  <% if @document.archived %>
+    <%= link_to "Удалить", document_path(@document), class: 'btn btn-primary btn-sm',
+      data: {turbo_method: :delete, turbo_confirm: 'Действительно удалить документ?'} %>
+  <% else %>
+    <%= link_to "Редактировать", edit_document_path(@document), class: 'btn btn-primary btn-sm' %>
+    <%= link_to "Архивировать", archive_document_path(@document), class: 'btn btn-primary btn-sm' %>
+    <%= link_to "Удалить", document_path(@document), class: 'btn btn-primary btn-sm',
+      data: {turbo_method: :delete, turbo_confirm: 'Действительно удалить документ?'} %>
+  <% end %>
+</div>
 
 <%= render @document %>

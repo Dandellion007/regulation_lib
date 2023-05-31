@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :sub_title do %>
+  Архивные документы
+<% end %>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Обозначение</th>
+        <th>Код ОКС</th>
+        <th>Наименование</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @documents.each_with_index do |document, i| %>
+        <tr>
+          <th class="number"><%= i + 1 %></th>
+          <td><%= document.original.try(:designation) %></td>
+          <td><%= document.original.try(:oks_code) %></td>
+          <td><%= document.original.try(:denomination) %></td>
+          <td><%= button_to "", document, method: :get, class: "document_action_btn show_action" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

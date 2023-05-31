@@ -1,8 +1,8 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: %i[show edit raw_edit update destroy]
+  before_action :set_document, only: %i[show edit raw_edit archive update destroy]
 
   def index
-    @documents = Document.all
+    @documents = Document.active
   end
 
   def show; end
@@ -14,6 +14,19 @@ class DocumentsController < ApplicationController
   def edit; end
 
   def raw_edit; end
+
+  def archive
+    @document = DocumentService.new.archive(@document)
+    if @document.errors.empty?
+      redirect_to document_url(@document), notice: "Документ архивирован."
+    else
+      render json: @document.errors, status: :unprocessable_entity
+    end
+  end
+
+  def archive_index
+    @documents = Document.archived
+  end
 
   def create
     @document = DocumentService.new.create(document_params)

@@ -5,7 +5,8 @@ class Document < ApplicationRecord
   has_many :original_references, through: :original, source: 'references', dependent: :destroy
   has_many :shift_references, through: :shift, source: 'references', dependent: :destroy
 
-  # :archived=>false,
+  scope :archived, -> { where archived: true }
+  scope :active, -> { where archived: false }
 
   class << self
     def all_fields
