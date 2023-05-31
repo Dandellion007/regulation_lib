@@ -13,6 +13,10 @@ class Document < ApplicationRecord
       [:strings, :dates, :texts, :enums].map { |s| send(s) }.inject(:|)
     end
 
+    def search_fields
+      [:strings, :dates, :texts, :enums].map { |s| send(s) }.inject(:|)
+    end
+
     def strings
       [
         :designation, :denomination, :oks_code, :okpd_code, :developer,
@@ -38,6 +42,22 @@ class Document < ApplicationRecord
 
     def activity_status_for_select
       FieldsSet.activity_statuses.map { |k, v| [(I18n.t "model.document.activity_status_values.#{k}"), v] }
+    end
+
+    def search(search_params, scope = 'active')
+      # ds.joins(:original).where(original: {documents: 'a'})
+      search_params = search_params.to_h.filter { |_, v| v.present? }.symbolize_keys
+      return Document.send(scope) if search_params.empty?
+
+      hash = {}
+      Document.active.map { |x| hash[x.id] = x.last_values }
+      ids = hash.filter { |_, v| compare_fields(v, search_params) }.keys
+      Document.send(scope).where(id: ids)
+    end
+
+    def compare_fields(values, params)
+      params.each { |k, v| return false unless values[k].include?(v) }
+      true
     end
   end
 

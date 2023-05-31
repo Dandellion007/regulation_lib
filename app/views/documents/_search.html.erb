@@ -1,0 +1,10 @@
+<%#= form_with model: document, class: 'edit_form needs-validation', id: 'document_form_edit'  do |form| %>
+<%= form_with scope: :search, method: :get do |form| %>
+  <div class="table-responsive">
+    <%= form.text_field :designation, class: 'form-control mb-2 search_field', value: @designation %>
+  </div>
+
+  <div >
+    <%= form.submit 'Поиск', class: 'btn btn-primary btn-sm' %>
+  </div>
+<% end %>

@@ -1,8 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :sub_title do %>
   Документы
 <% end %>
+
+<%= render "search" %>
 
 <div class="table-responsive">
   <table class="table table-hover">
@@ -14,7 +14,6 @@
         <th>Наименование</th>
         <th></th>
         <th></th>
-        <%# <th></th> %>
       </tr>
     </thead>
     <tbody>
@@ -26,7 +25,7 @@
           <td><%= document.original.try(:denomination) %></td>
           <td><%= button_to "", document, method: :get, class: "document_action_btn show_action" %></td>
           <td><%= button_to "", edit_document_path(document), method: :get, class: "document_action_btn edit_action" %></td>
-           <!--<td><%#= button_to "", raw_edit_document_path(document), method: :get, class: "document_action_btn raw_edit_action" %></td>-->
+           <!--button_to "", raw_edit_document_path(document), method: :get, class: "document_action_btn raw_edit_action"-->
         </tr>
       <% end %>
     </tbody>

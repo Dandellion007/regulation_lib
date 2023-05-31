@@ -2,7 +2,13 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: %i[show edit raw_edit archive update destroy]
 
   def index
-    @documents = Document.active
+    if params.key?(:search)
+      @documents = Document.search(search_params)
+      @designation = search_params[:designation]
+    else
+      @documents = Document.search({})
+      @designation = ''
+    end
   end
 
   def show; end
@@ -63,5 +69,9 @@ class DocumentsController < ApplicationController
 
   def document_params
     params.require(:document).permit(Document.all_fields)
+  end
+
+  def search_params
+    params.require(:search).permit(Document.search_fields)
   end
 end
