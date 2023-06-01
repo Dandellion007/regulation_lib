@@ -40,5 +40,9 @@ ru:
           attributes:
             designation:
               blank: 'Не указано краткое название'
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: 'Пароли не совпадают.'
       messages:
         record_invalid: 'Ошибки при сохраненнии Параметров'

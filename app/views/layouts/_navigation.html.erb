@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
+
+
+     <% if current_user %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,12 +17,12 @@
           <a id="new" class="nav-link <%= class_var %>" href=<%= new_document_path %>>Создать документ</a>
         </li>
         <li class="nav-item">
-          <a id="archive_index" class="nav-link <%= class_var %>" href=<%= archive_index_path %>>Архив</a>
+          <a  id="archive_index" class="nav-link <%= class_var %>" href=<%= archive_index_path %>>Архив</a>
         </li>
       </ul>
     </div>
 
-     <% if current_user %>
+    
       <span class="nav-item mr-3 nav-link p-3">Выйти</span>
       <%= button_to "", destroy_user_session_path, method: :delete, class: "action_btn logout_action" %>
      <% end %>
