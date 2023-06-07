@@ -40,6 +40,8 @@ module RegulationLib
       "#{html_tag}".html_safe
     }
 
+    config.hosts << "60b4-5-165-230-212.ngrok-free.app"
+
     # I18n configs (from crm configs)
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{yml}').to_s]
     I18n.available_locales = [:en, :ru] # разрешенные локали, доступные приложению

@@ -61,5 +61,5 @@ ru:
       not_found: "не найдено"
       not_locked: "не был заблокирован"
       not_saved:
-        one: "1  5: "1 ошибка не позволила этому %{resource} быть 55555:"e-- rror prohibited this %{resource} from being saved:"
-        other:  5: "Ошибки %{count} не позволили этому %{resource} быть 55555:""-- %{count} errors prohibited this %{resource} from being saved:"
+        one: ""
+        other: ""
