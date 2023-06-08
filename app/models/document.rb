@@ -21,7 +21,7 @@ class Document < ApplicationRecord
       [
         :designation, :denomination, :oks_code, :okpd_code, :developer,
         :replacement_for, :doc_content_link, :amendments,
-      ]
+      ] << 'reference'
     end
 
     def dates
@@ -56,8 +56,20 @@ class Document < ApplicationRecord
     end
 
     def compare_fields(values, params)
-      params.each { |k, v| return false unless values[k].include?(v) }
+      params.each do |k, v|
+        return false if values[k].nil?
+
+        if values[k].is_a?(Integer)
+          return false if values[k] != v.to_i
+        else
+          return false if values[k].exclude?(v)
+        end
+      end
       true
+    end
+
+    def designations
+      active.map { |x| x.last_values[:designation] }
     end
   end
 
@@ -66,6 +78,8 @@ class Document < ApplicationRecord
 
     @last_values = {}
     self.class.all_fields.each do |field|
+      next if field == 'reference'
+
       @last_values[field] = if shift && !shift.send(field).nil?
                               shift.try(:send, "#{field}_before_type_cast")
                             else

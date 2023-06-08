@@ -85,6 +85,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-security (0.18.0)
+      devise (>= 4.3.0)
     diff-lcs (1.5.0)
     erubi (1.12.0)
     foreman (0.87.2)
@@ -216,6 +218,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise (~> 4.9, >= 4.9.2)
+  devise-security
   foreman (~> 0.87.2)
   i18n
   jbuilder

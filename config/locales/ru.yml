@@ -17,6 +17,7 @@ ru:
       introduction_date: 'Дата введения'
       desc_update_date: 'Дата актуализации описания'
       acceptance_level: 'Уровень принятия'
+      reference: 'Нормативные ссылки'
       acceptance_level_values:
         international: 'Международный'
         foreign: 'Иностранный'
@@ -28,7 +29,21 @@ ru:
         active: 'Действующий'
         canceled: 'Отменен'
         replaced: 'Заменен'
+    user:
+      login: 'Логин'
   activerecord:
+    models:
+      user:
+        one: 'Пользователь'
+        few: 'Пользователя'
+        many: 'Пользователь'
+        other: 'Пользователи'
+        one_accusative: 'Пользователю'
+    attributes:
+      user:
+        email: 'Логин'
+        password: 'Пароль'
+        password_confirmation: 'Пароли'
     errors:
       template:
         header:
@@ -43,6 +58,12 @@ ru:
         user:
           attributes:
             password_confirmation:
-              confirmation: 'Пароли не совпадают.'
+              confirmation: 'не совпадают.'
+            email:
+              invalid: 'должен содержать только символы _, A-z, 0-9.'
+              blank: 'не должен быть пустым.'
+            password:
+              too_short: 'должен быть не короче 8 символов.'
+              blank: 'не должен быть пустым.'
       messages:
-        record_invalid: 'Ошибки при сохраненнии Параметров'
+        record_invalid: 'Ошибки при сохраненнии параметров'

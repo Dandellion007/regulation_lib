@@ -1,13 +1,36 @@
 class DocumentService
-  def create(params)
-    params = params.to_h
+  def create(params, reference_params)
+    # debugger
 
+    params = params.to_h
     params = params.compact_blank
     document = Document.new
     original = document.build_original(enum_value_to_i(params))
-
     original.save ? document.save : original.errors.messages.each { |k, v| document.errors.add(k, *v) }
+
+    create_references(document, original, reference_params)
+
     document
+  end
+
+  def create_references(document, field_set, reference_params)
+    designations = reference_params['reference']
+
+    shift_sets = FieldsSet.where(designation: designations, set_type: 'shift')
+    shift_designations = shift_sets.map(&:designation)
+
+    original_sets = FieldsSet.where(designation: designations - shift_designations,
+                                    set_type: 'original')
+    original_designations = original_sets.map(&:designation)
+
+    unknown_designations = designations - shift_designations - original_designations
+
+    referral_ids = shift_sets.map(&:id) | original_sets.map(&:id)
+
+    referral_ids.each do |referral_id|
+      Reference.create(fields_set_id: field_set.id, referrer_doc_id: document.id, referral_doc_id: referral_id)
+    end
+    field_set.update(fields_sets: unknown_designations)
   end
 
   def update(params, document)

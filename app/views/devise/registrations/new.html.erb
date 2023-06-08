@@ -8,23 +8,51 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="form-group row mb-3 mt-3">
-        <label class="col-sm-3 col-form-label">Email</label>
+        <label class="col-sm-3 col-form-label">Логин</label>
         <div class="col-sm-7">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+          <%= f.text_field :email, autofocus: true, class: "form-control" %>
         </div>
       </div>
 
       <div class="form-group row mb-3">
         <label class="col-sm-3 col-form-label">Пароль</label>
         <div class="col-sm-7">
-          <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: 'не менее 6 символов' %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         </div>
       </div>
 
       <div class="form-group row mb-3">
         <label class="col-sm-3 col-form-label">Подтвердите пароль</label>
         <div class="col-sm-7">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: 'не менее 6 символов' %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3">
+        <label class="col-sm-3 col-form-label">ФИО пользователя</label>
+        <div class="col-sm-7">
+          <%= f.text_field :full_name, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3">
+        <label class="col-sm-3 col-form-label">Название организации</label>
+        <div class="col-sm-7">
+          <%= f.text_field :company, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3">
+        <label class="col-sm-3 col-form-label">Отделение организации</label>
+        <div class="col-sm-7">
+          <%= f.text_field :company_department, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3">
+        <label class="col-sm-3 col-form-label">Деятельность организации</label>
+        <div class="col-sm-7">
+          <%= f.text_field :company_activity, class: "form-control" %>
         </div>
       </div>
 

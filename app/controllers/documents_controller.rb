@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: %i[show edit raw_edit archive update destroy]
+  before_action :check_user_is_admin, except: %i[index show search_index]
 
   def index
     if params.key?(:search)
@@ -34,8 +35,19 @@ class DocumentsController < ApplicationController
     @documents = Document.archived
   end
 
+  def search_index
+    if params.key?(:search)
+      @documents = Document.search(search_params)
+      @search_params = search_params
+    else
+      @documents = Document.search({})
+    end
+  end
+
   def create
-    @document = DocumentService.new.create(document_params)
+    debugger
+
+    @document = DocumentService.new.create(document_params, reference_params)
     if @document.errors.empty?
       redirect_to document_url(@document), notice: "Документ успешно создан."
     else
@@ -47,9 +59,10 @@ class DocumentsController < ApplicationController
   def update
     @document = DocumentService.new.update(document_params, @document)
     if @document.errors.empty?
-      render json: {path: document_url(@document), notice: "Документ успешно обновлен."}
+      redirect_to document_url(@document), notice: "Документ успешно обновлен."
     else
-      render json: @document.errors, status: :unprocessable_entity
+      @fail_field = @document.errors.messages.keys[0]
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -72,7 +85,15 @@ class DocumentsController < ApplicationController
     params.require(:document).permit(Document.all_fields)
   end
 
+  def reference_params
+    params.permit(reference: [])
+  end
+
   def search_params
     params.require(:search).permit(Document.search_fields)
+  end
+
+  def check_user_is_admin
+    redirect_to documents_url and return unless current_user.admin?
   end
 end

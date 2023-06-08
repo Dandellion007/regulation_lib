@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   get 'errors/route_not_found'
   get 'errors/internal_server_error'
 
-  devise_for :users
+  resources :users_menu
+
+  devise_for :users, controllers: {
+    # sessions: 'users/sessions',
+    registrations: 'users/registrations',
+  }
 
   resources :documents do
     member do
@@ -14,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   get 'archive_index', to: 'documents#archive_index'
+  get 'search_index', to: 'documents#search_index'
 
   get "home/index"
   root to: "documents#index"
