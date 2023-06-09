@@ -15,19 +15,40 @@
             <td><pre style="font-family: inherit; max-width: 600px;"><%= @document.original.try(:send, field) %></pre></td>
             <td><pre style="font-family: inherit; max-width: 600px;"><%= @document.shift.try(:send, field) %></pre></td>    
           <% elsif Document.enums.include?(field) %>
-            <td><p style="max-width: 400px; word-break: break-word; margin-bottom: 0px">
+            <td><p class='table_item'>
               <% if @document.original && @document.original.try(:send, field) %>
                 <%= t "model.document.#{field}_values.#{@document.original.send(field)}" %>
               <% end %>
             </p></td>
-            <td><p style="max-width: 400px; word-break: break-word; margin-bottom: 0px">
+            <td><p class='table_item'>
               <% if @document.shift && @document.shift.try(:send, field) %>
                 <%= t "model.document.#{field}_values.#{@document.shift.send(field)}" %>
               <% end %>
             </p></td>
+          <% elsif field == 'reference' %>
+            <td>
+              <% @document.original&.inactive_refs&.each do |ref| %>
+                <p class='table_item'><%= ref %></p>
+              <% end %>
+              <% @document.original&.refs&.each do |active_ref| %>
+                <p class='table_item'>
+                  <%= link_to active_ref[:name], active_ref[:path] %>
+                </p>
+              <% end %>
+            </td>
+            <td>
+              <% @document.shift&.inactive_refs&.each do |ref| %>
+                <p class='table_item'><%= ref %></p>
+              <% end %>
+              <% @document.shift&.refs&.each do |active_ref| %>
+                <p class='table_item'>
+                  <%= link_to active_ref[:name], active_ref[:path] %>
+                </p>
+              <% end %>
+            </td>
           <% else %>
-            <td><p style="max-width: 400px; word-break: break-word; margin-bottom: 0px"><%= @document.original.try(:send, field) %></p></td>
-            <td><p style="max-width: 400px; word-break: break-word; margin-bottom: 0px"><%= @document.shift.try(:send, field) %></p></td>
+            <td><p class='table_item'><%= @document.original.try(:send, field) %></p></td>
+            <td><p class='table_item'><%= @document.shift.try(:send, field) %></p></td>
           <% end %>
         </tr>
       <% end %>

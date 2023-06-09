@@ -56,16 +56,19 @@
       "<%= str %>",
     <% end %>
   ];
+  let name = "reference[]";
+  let id;
 
   function createInput(str_value) {
     let my_block = null;
     let newDiv = null;
-    let name = "reference[]";
 
-    newDiv = document.createElement("span");
+    id = name + window.counter++
+
+    newDiv = document.createElement("div");
     newDiv.style = 'display: flex; margin-bottom: 10px;';
 
-    newDiv.innerHTML = `<input id="` + name +
+    newDiv.innerHTML = `<input id="` + id +
       `" type="text" name="` + name +
       `" class="form-control" autocomplete="off" value="` + str_value +
       `"><button type="button" onclick='removeInput(this)' class='ref_action_btn rm_ref'></button>`;
@@ -73,7 +76,7 @@
     my_block = document.getElementById("normRefBlock");
     my_block.insertAdjacentElement('beforeend', newDiv);
 
-    autocomplete(document.getElementById(name), names);
+    autocomplete(document.getElementById(id), names);
   }
 
   function removeInput(el) {

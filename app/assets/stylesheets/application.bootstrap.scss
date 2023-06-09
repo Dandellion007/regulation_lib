@@ -183,6 +183,12 @@ table.table {
   color: #ffffff;
 }
 
+p.table_item {
+  max-width: 400px;
+  word-break: break-word;
+  margin-bottom: 0px;
+}
+
 @import "navigation.scss";
 
 @import "bootstrap/scss/bootstrap";

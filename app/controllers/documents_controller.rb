@@ -45,8 +45,6 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    debugger
-
     @document = DocumentService.new.create(document_params, reference_params)
     if @document.errors.empty?
       redirect_to document_url(@document), notice: "Документ успешно создан."

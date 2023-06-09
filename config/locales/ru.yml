@@ -21,8 +21,7 @@ ru:
       acceptance_level_values:
         international: 'Международный'
         foreign: 'Иностранный'
-        national: 'Национальный'
-        interstate: 'Межгосударственный'
+        national: 'Национальный/межгосударственный'
         organizations:  'Стандарт организации'
       activity_status: 'Статус активности'
       activity_status_values:

@@ -1,7 +1,5 @@
 class DocumentService
   def create(params, reference_params)
-    # debugger
-
     params = params.to_h
     params = params.compact_blank
     document = Document.new
@@ -30,7 +28,7 @@ class DocumentService
     referral_ids.each do |referral_id|
       Reference.create(fields_set_id: field_set.id, referrer_doc_id: document.id, referral_doc_id: referral_id)
     end
-    field_set.update(fields_sets: unknown_designations)
+    field_set.update(unknown_refs: unknown_designations)
   end
 
   def update(params, document)
