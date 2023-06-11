@@ -1,83 +1,83 @@
 <%= form_with scope: :search, method: :get do |form| %>
-    <% if agent_mobile? %>
-      <div class="table-responsive">
-        <table class="table table-hover ">
-          <tbody>
-            <% Document.all_fields.each do |field| %>
-              <tr>
-                <td style="width: 40%; vertical-align: middle; font-size: 0.9rem;"><div class='m-0'><%= t "model.document.#{field}" %></div></td>
-                <td style="width: 60%">
-                  <% if Document.dates.include?(field) %>
-                    <%= form.date_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
-                  <% elsif Document.enums.include?(field) %>
-                    <%= form.select(field, options_for_select(Document.send("#{field}_for_select"), @search_params&.fetch(field, '')),
-                      {include_blank: true}, {class: 'form-select m-0 search_field'}) %>
-                  <% else %>
-                    <%= form.text_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    <% else %>
-      <div class="table-responsive">
-        <table class="table">
-          <tbody>
-              <tr>
-                <td style="width: 50%;">
-                  <div class="table-responsive">
-                    <table class="table table-hover ">
-                      <tbody>
-                        <% Document.all_fields.slice(0..7).each do |field| %>
-                          <tr>
-                            <td style="width: 40%; vertical-align: middle; font-size: 0.9rem;"><div class='m-0'><%= t "model.document.#{field}" %></div></td>
-                            <td style="width: 60%">
-                              <% if Document.dates.include?(field) %>
-                                <%= form.date_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
-                              <% elsif Document.enums.include?(field) %>
-                                <%= form.select(field, options_for_select(Document.send("#{field}_for_select"), @search_params&.fetch(field, '')),
-                                  {include_blank: true}, {class: 'form-select m-0 search_field'}) %>
-                              <% else %>
-                                <%= form.text_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
-                              <% end %>
-                            </td>
-                          </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
-                <td style="width: 50%;">
-                  <div class="table-responsive">
-                    <table class="table table-hover ">
-                      <tbody>
-                        <% Document.all_fields.slice(8..15).each do |field| %>
-                          <tr>
-                            <td style="width: 40%; vertical-align: middle; font-size: 0.9rem;"><div class='m-0'><%= t "model.document.#{field}" %></div></td>
-                            <td style="width: 60%">
-                              <% if Document.dates.include?(field) %>
-                                <%= form.date_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
-                              <% elsif Document.enums.include?(field) %>
-                                <%= form.select(field, options_for_select(Document.send("#{field}_for_select"), @search_params&.fetch(field, '')),
-                                  {include_blank: true}, {class: 'form-select m-0 search_field'}) %>
-                              <% else %>
-                                <%= form.text_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
-                              <% end %>
-                            </td>
-                          </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-          </tbody>
-        </table>
-      </div>
-    <% end %>
-  <div >
+  <% if agent_mobile? %>
+    <div class="table-responsive">
+      <table class="table table-hover ">
+        <tbody>
+          <% Document.all_fields.each do |field| %>
+            <tr>
+              <td style="width: 40%; vertical-align: middle; font-size: 0.9rem;"><div class='m-0'><%= t "model.document.#{field}" %></div></td>
+              <td style="width: 60%">
+                <% if Document.dates.include?(field) %>
+                  <%= form.date_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
+                <% elsif Document.enums.include?(field) %>
+                  <%= form.select(field, options_for_select(Document.send("#{field}_for_select"), @search_params&.fetch(field, '')),
+                    {include_blank: true}, {class: 'form-select m-0 search_field'}) %>
+                <% else %>
+                  <%= form.text_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="table-responsive">
+      <table class="table" style="border-bottom: 0px white solid; margin-bottom: 0px;">
+        <tbody>
+            <tr>
+              <td style="width: 50%;">
+                <div class="table-responsive">
+                  <table class="table table-hover ">
+                    <tbody>
+                      <% Document.all_fields.slice(0..7).each do |field| %>
+                        <tr>
+                          <td style="width: 40%; vertical-align: middle; font-size: 0.9rem;"><div class='m-0'><%= t "model.document.#{field}" %></div></td>
+                          <td style="width: 60%">
+                            <% if Document.dates.include?(field) %>
+                              <%= form.date_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
+                            <% elsif Document.enums.include?(field) %>
+                              <%= form.select(field, options_for_select(Document.send("#{field}_for_select"), @search_params&.fetch(field, '')),
+                                {include_blank: true}, {class: 'form-select m-0 search_field'}) %>
+                            <% else %>
+                              <%= form.text_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+              <td style="width: 50%;">
+                <div class="table-responsive">
+                  <table class="table table-hover ">
+                    <tbody>
+                      <% Document.all_fields.slice(8..15).each do |field| %>
+                        <tr>
+                          <td style="width: 40%; vertical-align: middle; font-size: 0.9rem;"><div class='m-0'><%= t "model.document.#{field}" %></div></td>
+                          <td style="width: 60%">
+                            <% if Document.dates.include?(field) %>
+                              <%= form.date_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
+                            <% elsif Document.enums.include?(field) %>
+                              <%= form.select(field, options_for_select(Document.send("#{field}_for_select"), @search_params&.fetch(field, '')),
+                                {include_blank: true}, {class: 'form-select m-0 search_field'}) %>
+                            <% else %>
+                              <%= form.text_field field, class: 'form-control m-0 search_field', value: @search_params&.fetch(field, '') %>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+  <div style="margin-bottom: 10px;">
     <%= form.submit 'Поиск', class: 'btn btn-primary btn-sm' %>
   </div>
 <% end %>
