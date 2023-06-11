@@ -3,7 +3,6 @@ class User < ApplicationRecord
 
   validates_format_of :email, with: /\A\w+\z/
 
-
   def admin?
     is_admin == '1' || is_admin == true || is_admin == 't'
   end

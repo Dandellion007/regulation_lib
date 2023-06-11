@@ -3,14 +3,16 @@
 <% end %>
 
 <div style="margin-bottom: 10px;">
-  <% if @document.archived %>
-    <%= link_to "Удалить", document_path(@document), class: 'btn btn-primary btn-sm',
-      data: {turbo_method: :delete, turbo_confirm: 'Действительно удалить документ?'} %>
-  <% else %>
-    <%= link_to "Редактировать", edit_document_path(@document), class: 'btn btn-primary btn-sm' %>
-    <%= link_to "Архивировать", archive_document_path(@document), class: 'btn btn-primary btn-sm' %>
-    <%= link_to "Удалить", document_path(@document), class: 'btn btn-primary btn-sm',
-      data: {turbo_method: :delete, turbo_confirm: 'Действительно удалить документ?'} %>
+  <% if current_user.admin? %>
+    <% if @document.archived %>
+      <%= link_to "Удалить", document_path(@document), class: 'btn btn-primary btn-sm',
+        data: {turbo_method: :delete, turbo_confirm: 'Действительно удалить документ?'} %>
+    <% else %>
+      <%= link_to "Редактировать", edit_document_path(@document), class: 'btn btn-primary btn-sm' %>
+      <%= link_to "Архивировать", archive_document_path(@document), class: 'btn btn-primary btn-sm' %>
+      <%= link_to "Удалить", document_path(@document), class: 'btn btn-primary btn-sm',
+        data: {turbo_method: :delete, turbo_confirm: 'Действительно удалить документ?'} %>
+    <% end %>
   <% end %>
 </div>
 

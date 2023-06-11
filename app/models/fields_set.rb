@@ -17,10 +17,14 @@ class FieldsSet < ApplicationRecord
 
   def refs
     references.map do |ref|
-      {
-        name: ref.referral_doc.last_values[:designation],
-        path: Rails.application.routes.url_helpers.document_path(ref.referral_doc),
-      }
+      if ref.referral_doc
+        {
+          name: ref.referral_doc.last_values[:designation],
+          path: Rails.application.routes.url_helpers.document_path(ref.referral_doc),
+        }
+      else
+        {name: '', path: ''}
+      end
     end
   end
 end
